@@ -1,5 +1,4 @@
 ---
-//make this JSX, active state on hover.
 type ReactLogoProps = {
   size?: 'small' | 'large',
 };
@@ -18,10 +17,12 @@ const { size } = Astro.props as ReactLogoProps;
 
   .orbit {
     border: .375rem solid deepskyblue;
+    background: transparent;
     border-radius: 100% 25%;
     width: 5rem;
     height: 5rem;
-    transition: all 0.25s;
+
+    transition: all .5s;
   }
 
   #react-logo {
@@ -30,31 +31,37 @@ const { size } = Astro.props as ReactLogoProps;
     height: fit-content;
     /* animation: spin 3s infinite linear; */
   }
-  #react-logo:hover #nucleus{
-    transform: translateX(-6rem) translateY(30rem) scaleX(20) scaleY(90);
-    border-radius: 0;
-    z-index: -1;
+  #nucleus.active{
+    animation-name: move-nucleus;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
   }
-  #react-logo:hover #rising {
+  @keyframes move-nucleus {
+    0% { transform: scale(1); pointer-events: none }
+    100% { transform: translateX(-45vw) translateY(45vh) scaleX(300) scaleY(300); opacity: 0; pointer-events: none }
+  }
+
+  /* #react-logo.active #rising {
     background: white;
     z-index: 1;
-    border: none;
+    border: .1rem solid white;
     border-radius: 0;
     width: .5rem;
     transform: rotateZ(45deg);
   }
-  #react-logo:hover #falling {
+
+  #react-logo.active #falling {
     background: white;
     z-index: 1;
-    border: none;
+    border: .1rem solid white;
     border-radius: 0;
     width: .5rem;
     transform: rotateZ(-45deg);
   }
 
-  #react-logo:hover #horizontal {
-    border: none;
-  }
+  #react-logo.active #horizontal {
+    border: .1rem solid transparent;
+  } */
 
   #rising {
     transform: rotateY(45deg);
@@ -85,6 +92,7 @@ const { size } = Astro.props as ReactLogoProps;
     border-radius: 50%;
     background: deepskyblue;
     transition: all 0.25s;
+    cursor: pointer;
   }
 
 
