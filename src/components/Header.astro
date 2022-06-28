@@ -1,0 +1,81 @@
+---
+import ReactLogo from "./ReactLogo.astro";
+
+const navItems = [
+  {
+    title: 'About Me',
+  },
+  {
+    title: 'Projects'
+  },
+  {
+    title: 'Resume'
+  }
+]
+---
+<div id="header">
+  <img src="" alt="logo" id="logo">
+  <nav>
+    <ul>
+      {navItems.map(item => (
+        <li class="nav-item" id={`nav-item-${item.title}`}>
+          <p>{item.title}</p>
+        </li>
+      ))}
+    </ul>
+  </nav>
+  <div id="react-logo-container"><ReactLogo size={'large'}/></div>
+</div>
+
+<style>
+
+  #header {
+    width: 100%;
+    box-sizing: content-box;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    border: 1px solid transparent;
+    transition: transform 0.5s;
+  }
+  #react-logo-container {
+    min-width: 8rem;
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+
+  html:not([data-scroll='0']) #header {
+    border-radius: 2rem;
+    transform: scale(.9);
+    margin: 1rem auto;
+    background: rgba(255, 255, 255, 0.8);
+    color: black;
+  }
+
+  nav {
+    min-width: 20rem;
+    width: 50%;
+  }
+
+  ul {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  li {
+    margin: 1em 0;
+    padding: 0.5em 1em;
+    border: .1rem solid black;
+    transition: all 0.4s;
+    cursor: pointer;
+    display: flex;
+    /* overflow: hidden; */
+  }
+
+</style>
