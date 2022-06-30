@@ -3,13 +3,16 @@ import ReactLogo from "./ReactLogo.astro";
 
 const navItems = [
   {
-    title: 'About Me',
+    title: 'ABOUT ME',
+    section_id: 'about'
   },
   {
-    title: 'Projects'
+    title: 'PROJECTS',
+    section_id: 'projects'
   },
   {
-    title: 'Resume'
+    title: 'RESUME',
+    section_id: 'resume'
   }
 ]
 
@@ -19,8 +22,8 @@ const navItems = [
   <nav>
     <ul>
       {navItems.map(item => (
-        <li class="nav-item" id={`nav-item-${item.title}`}>
-          <p>{item.title}</p>
+        <li class="nav-item" id={`nav-item-${item.title}`} onclick={`smoothScroll(document.getElementById('${item.section_id}'))`}>
+          <b>{item.title}</b>
         </li>
       ))}
     </ul>
@@ -42,6 +45,7 @@ const navItems = [
     border: 1px solid transparent;
     transition: transform 0.5s;
   }
+  
   #react-logo-container {
     min-width: 8rem;
     width: 10%;
@@ -72,7 +76,6 @@ const navItems = [
   li {
     margin: 1em 0;
     padding: 0.5em 1em;
-    border: .1rem solid black;
     transition: all 0.4s;
     cursor: pointer;
     display: flex;
