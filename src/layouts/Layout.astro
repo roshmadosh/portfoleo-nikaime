@@ -21,6 +21,7 @@ const { title } = Astro.props as Props;
   <script src="../js/scrollHandler.ts"></script>
   <script src="../js/themeHandler.js"></script>
   <script src="../js/navHandler.js"></script>
+  <script src="../js/coverHandler.js"></script>
 </head>
 <body id="body">
   <Header />
@@ -40,10 +41,11 @@ const { title } = Astro.props as Props;
   body {
     background: #eee;
     color: #222;
+    box-sizing: border-box;
   }
 
   body.red {
-    background: linear-gradient(to bottom, rgb(45, 246, 125), rgb(0, 255, 149), rgb(0, 255, 200));
+    background: linear-gradient(to bottom, rgb(237, 151, 117), rgb(236, 171, 146),rgb(232, 199, 186));
     color: black;
   }
 
@@ -79,10 +81,14 @@ const { title } = Astro.props as Props;
   }
 
   :global(h1) {
+    font-size: calc(3 * var(--font-size-p));
+  }
+
+  :global(h2) {
     font-size: calc(2 * var(--font-size-p));
   }
 
-  :global(p, span, li) {
+  :global(p, span, li, b) {
     font-size: var(--font-size-p);
   }
 

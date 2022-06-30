@@ -6,6 +6,7 @@ const storeScroll = () => {
   document.documentElement.dataset.scroll = `${window.scrollY}`;
 }
 
+
 // Listen for new scroll events, here we debounce our `storeScroll` function
 document.addEventListener('scroll', _.debounce(storeScroll, 250, { leading: true }), { passive: true });
 
