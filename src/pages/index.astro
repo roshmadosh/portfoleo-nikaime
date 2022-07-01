@@ -26,7 +26,11 @@ import Layout from '../layouts/Layout.astro';
       <div class="sub-section about desc">
         <div id="about-desc-content">
           <h2>About Me</h2>
-          <p>This is a description about myself</p>
+          <div id="bio">
+            <p>My name is Hiroshi and I was born and raised in NYC.</p>
+            <br>
+            <p>I wrote my first line of code in July 2021 as a Revature Associate.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -53,6 +57,15 @@ import Layout from '../layouts/Layout.astro';
     grid-template-rows: calc(100vh - 11rem) repeat(3, 100vh);
   }
 
+  #bio {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    padding: 1rem;
+  }
+
+  #bio > p {
+    margin-bottom: 1em;
+  }
+
   section {
     border: .5rem solid black;
     border-left: none;
@@ -74,7 +87,7 @@ import Layout from '../layouts/Layout.astro';
 
   #cover-content {
     width: 100%;
-    height: 200rem;
+    height: 150rem;
     position: relative;
   }
   #sticky-cover-container {
@@ -88,11 +101,47 @@ import Layout from '../layouts/Layout.astro';
     font-size: 24rem;
     font-family: 'Times New Roman', Times, serif;
   }
+  #sticky-cover-container > img:nth-of-type(1) {
+    animation: move-right-and-up 1s linear infinite;
+  }
+  #sticky-cover-container > img:nth-of-type(2) {
+    animation: move-left-and-up 1s linear infinite;
+  }
+  #sticky-cover-container > img:nth-of-type(3) {
+    animation: move-right-and-down 1s linear infinite;
+    z-index: 2;
+  }
+
+  #sticky-cover-container > img:nth-of-type(1),
+  #sticky-cover-container > img:nth-of-type(2),
+  #sticky-cover-container > img:nth-of-type(3) {
+    animation-play-state: paused;
+    animation-delay: calc(var(--scroll) * -1s);
+    animation-fill-mode: forwards;
+  }
+  @keyframes move-right-and-up {
+    to {
+      transform: translateX(20vw) translateY(calc((20vh - 11rem) * -1));
+      opacity: 1;
+    }
+  }
+  @keyframes move-left-and-up {
+    to {
+      transform: translateX(-30vw) translateY(calc((30vh - 11rem) * -1));
+      opacity: 1;
+    }
+  }
+  @keyframes move-right-and-down {
+    100% {
+      transform: translateX(15vw) translateY(calc((40vh - 11rem) * 1));
+      opacity: 1;
+    }
+  }
   #sticky-cover-container > img {
     width: 30rem;
     height: auto;
     position: absolute;
-    top: calc((100vh - 11rem) * .5);
+    /* top: calc((100vh - 11rem) * .5); */
     z-index:-1;
     opacity: 0;
     transition: all .5s;

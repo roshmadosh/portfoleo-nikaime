@@ -9,26 +9,14 @@ do {
   scrollContainer.scrollTop += 1;
 } while (scrollContainer.scrollTop == 0)
 
-scrollContainer.addEventListener('scroll', _.debounce(onScroll, 200, { leading: true, maxWait: 200 }))
+// scrollContainer.addEventListener('scroll', _.debounce(onScroll, 200, { leading: true, maxWait: 200 }))
+scrollContainer.addEventListener('scroll', setScrollProperty);
 
-function onScroll() {
-  const top = this.scrollTop;
-  const topRatio = top / 1374.5;
-  images.forEach((image, idx) => {
-    image.style.opacity = `${topRatio}`;
-    switch(idx) {
-      case 0:
-        image.style.transform = `translate3d(calc(20vw * ${topRatio} * 1), calc((40vh - 11rem) * -1 * .5 * ${topRatio}), 0)`;
-        break;
-      case 1:
-        image.style.transform = `translate3d(calc(30vw * ${topRatio} * -1), calc((70vh - 11rem) * -1 * .5 * ${topRatio}), 0)`;
-        break;
-      case 2:
-        image.style.transform = `translate3d(calc(15vw * ${topRatio} * 1), calc((30vh - 11rem) * .5 * ${topRatio}), 0)`;
-        if (topRatio > .5) {
-          image.style.zIndex = '2';
-        }
-        break;
-    }
-  })
+function setScrollProperty() {
+  let viewHeight = scrollContainer.offsetHeight;
+  let contentHeight = scrollContainer.firstElementChild.offsetHeight;
+  let totalHeight = contentHeight - viewHeight;
+
+  // 10 + 1 (pixels) subtracted to account for borders/padding, animation resets if value is exactly 1.
+  scrollContainer.style.setProperty('--scroll', Math.min((scrollContainer.scrollTop - 11), totalHeight) / totalHeight);
 }
